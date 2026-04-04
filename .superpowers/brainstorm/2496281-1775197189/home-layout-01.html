@@ -1,0 +1,106 @@
+<h2>移动端首页结构</h2>
+<p class="subtitle">方向已固定为“今天黄历优先”。这里比较 3 种首屏层级，重点看信息顺序和阅读压力。</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div class="mockup-header">A. 推荐方案</div>
+        <div class="mockup-body">
+          <div class="section">
+            <div class="label">Top</div>
+            <div class="mock-nav">2026年4月3日 | 农历二月十六</div>
+          </div>
+          <div class="section">
+            <div class="label">Hero</div>
+            <div class="mock-content">今日宜 / 忌<br>一句白话总结</div>
+          </div>
+          <div class="section">
+            <div class="label">Core</div>
+            <div class="mock-content">吉时时间轴</div>
+          </div>
+          <div class="section">
+            <div class="label">Grid</div>
+            <div class="mock-content">冲煞 / 值神 / 建除 / 方位</div>
+          </div>
+          <div class="section">
+            <div class="label">Entry</div>
+            <div class="mock-content">日期切换 + 迷你月历</div>
+          </div>
+          <div class="section">
+            <div class="label">Explain</div>
+            <div class="mock-content">术语解释 / 节气民俗</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>信息先重后轻</h3>
+      <p>先给当天结论和核心黄历字段，再把日期入口放在中下部，最符合“打开就看今天黄历”的目标。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div class="mockup-header">B. 折中方案</div>
+        <div class="mockup-body">
+          <div class="section">
+            <div class="label">Top</div>
+            <div class="mock-nav">日期栏 + 左右切天</div>
+          </div>
+          <div class="section">
+            <div class="label">Calendar</div>
+            <div class="mock-content">横向周历条</div>
+          </div>
+          <div class="section">
+            <div class="label">Hero</div>
+            <div class="mock-content">今日宜 / 忌</div>
+          </div>
+          <div class="section">
+            <div class="label">Core</div>
+            <div class="mock-content">吉时 / 冲煞 / 值神</div>
+          </div>
+          <div class="section">
+            <div class="label">Explain</div>
+            <div class="mock-content">术语解释 / 节气说明</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>日期入口更强</h3>
+      <p>更利于切换日期，但首屏会被周历占掉一部分高度，黄历结论没有 A 那么直接。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div class="mockup-header">C. 信息墙方案</div>
+        <div class="mockup-body">
+          <div class="section">
+            <div class="label">Top</div>
+            <div class="mock-nav">今日日期 + 搜索</div>
+          </div>
+          <div class="section">
+            <div class="label">Hero</div>
+            <div class="mock-content">宜忌卡片</div>
+          </div>
+          <div class="section">
+            <div class="label">Masonry</div>
+            <div class="mock-content">吉时 / 方位 / 纳音 / 星宿 / 胎神</div>
+          </div>
+          <div class="section">
+            <div class="label">Explain</div>
+            <div class="mock-content">解释内容流</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>内容感更强</h3>
+      <p>看起来丰富，但学习成本和视觉压力都更高，不适合作为首版主结构。</p>
+    </div>
+  </div>
+</div>
