@@ -1,13 +1,63 @@
-# 万年历 Web
+# 万年历 Web / Android
 
-基于 `lunar-javascript` 的移动端优先万年历网页，当前包含今日黄历首页、月历查日、整日详情和术语说明页。
+基于 `lunar-javascript` 的移动端优先万年历，当前同时支持 Web 部署和 Android App 打包。当前包含今日黄历首页、月历查日、整日详情和术语说明页。
 
 ## 脚本
 
 - `pnpm dev`
 - `pnpm build`
+- `pnpm build:android`
+- `pnpm android:copy`
+- `pnpm android:sync`
+- `pnpm android:open`
 - `pnpm test`
 - `pnpm test:watch`
+
+## Android App
+
+项目已接入 `Capacitor 8`，可直接把现有 React + Vite 页面打包成 Android App，无需重写原生界面。
+
+常用流程：
+
+```bash
+pnpm install
+pnpm android:sync
+pnpm android:open
+```
+
+调试包：
+
+```bash
+cd android
+./gradlew assembleDebug
+```
+
+签名发布包：
+
+```bash
+cd android
+./gradlew assembleRelease
+```
+
+发布到 Google Play 的包：
+
+```bash
+cd android
+./gradlew bundleRelease
+```
+
+构建产物：
+
+- Debug APK：`android/app/build/outputs/apk/debug/app-debug.apk`
+- Release APK：`android/app/build/outputs/apk/release/app-release.apk`
+- Release AAB：`android/app/build/outputs/bundle/release/`
+
+说明：
+
+- Android 工程位于 `android/`
+- 原生容器内自动切换到 `HashRouter`，避免 WebView 场景下 history 路由刷新问题
+- 本地 SDK 路径、签名 keystore 和密码放在 `android/local.properties`，该文件不会提交到仓库
+- 详细说明见 `docs/android.md`
 
 ## Docker 部署
 

@@ -1,12 +1,15 @@
-import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
+import { Capacitor } from '@capacitor/core';
+import { BrowserRouter, HashRouter, Outlet, Route, Routes } from 'react-router-dom';
 import { AppLayout } from './layout/AppLayout';
 import { DayHomePage, HomePage } from '../pages/HomePage';
 import { CalendarPage } from '../pages/CalendarPage';
 import { ExplainPage } from '../pages/ExplainPage';
 
 export function AppRouter() {
+  const Router = Capacitor.isNativePlatform() ? HashRouter : BrowserRouter;
+
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route
           path="/"
@@ -22,6 +25,6 @@ export function AppRouter() {
           <Route path="explain/:key" element={<ExplainPage />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }

@@ -31,6 +31,7 @@ body {
   margin: 0;
   color: var(--ink);
   background: transparent;
+  overscroll-behavior-y: none;
 }
 
 body,
@@ -103,7 +104,7 @@ a {
 .app-shell {
   display: grid;
   gap: 18px;
-  padding: 16px 16px 40px;
+  padding: 16px 16px calc(40px + env(safe-area-inset-bottom));
 }
 
 .app-shell h1,
@@ -118,7 +119,7 @@ a {
   z-index: 10;
   display: grid;
   gap: 14px;
-  padding: 16px 16px 12px;
+  padding: calc(16px + env(safe-area-inset-top)) 16px 12px;
   backdrop-filter: blur(18px);
   background: linear-gradient(180deg, rgba(244, 234, 217, 0.94), rgba(244, 234, 217, 0.72));
 }
