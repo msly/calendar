@@ -63,6 +63,18 @@ export function MonthCalendar({ year, month, selectedDate, onSelectDate }: Month
                             aria-pressed={isoDate === selectedDate}
                             onClick={() => onSelectDate(isoDate)}
                           >
+                            {dayDisplay.officialHoliday ? (
+                              <span
+                                className={`month-calendar__holiday-badge month-calendar__holiday-badge--${dayDisplay.officialHoliday.status}`}
+                                aria-label={
+                                  dayDisplay.officialHoliday.status === 'work'
+                                    ? `${dayDisplay.officialHoliday.name}调休上班`
+                                    : `${dayDisplay.officialHoliday.name}休假`
+                                }
+                              >
+                                {dayDisplay.officialHoliday.status === 'work' ? '班' : '休'}
+                              </span>
+                            ) : null}
                             <span className="month-calendar__day-number">
                               {Number(isoDate.slice(-2))}
                             </span>

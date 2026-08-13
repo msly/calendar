@@ -71,10 +71,14 @@ test('opens the same day-view shell after selecting a date from the calendar pag
   window.history.pushState({}, '', '/calendar');
   render(<AppRouter />);
 
-  await user.click(screen.getByRole('button', { name: '2026-04-12' }));
+  const selectedDay = screen.getByRole('button', { pressed: true });
+  const selectedDate = selectedDay.getAttribute('aria-label');
+
+  expect(selectedDate).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+  await user.click(selectedDay);
 
   await waitFor(() => {
-    expect(window.location.pathname).toBe('/day/2026-04-12');
+    expect(window.location.pathname).toBe(`/day/${selectedDate}`);
   });
 
   expect(screen.getByRole('heading', { name: '今日黄历' })).toBeInTheDocument();

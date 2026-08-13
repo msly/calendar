@@ -1,4 +1,15 @@
 declare module 'lunar-javascript' {
+  export interface Holiday {
+    getDay(): string;
+    getName(): string;
+    isWork(): boolean;
+    getTarget(): string;
+  }
+
+  export class HolidayUtil {
+    static getHoliday(year: number, month: number, day: number): Holiday | null;
+  }
+
   export interface LunarTime {
     getZhi(): string;
     getYi(): string[];
@@ -11,6 +22,8 @@ declare module 'lunar-javascript' {
   }
 
   export interface Lunar {
+    getDayInChinese(): string;
+    getMonthInChinese(): string;
     getDayYi(): string[];
     getDayJi(): string[];
     getDayChongDesc(): string;
@@ -58,6 +71,8 @@ declare module 'lunar-javascript' {
   export class Solar {
     static fromYmd(year: number, month: number, day: number): Solar;
     getLunar(): Lunar;
+    getWeekInChinese(): string;
+    getFestivals(): string[];
     toYmd(): string;
   }
 }

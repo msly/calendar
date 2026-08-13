@@ -17,7 +17,7 @@ function DayRouteProbe() {
 }
 
 function renderCalendarPage(initialSelectedDate = '2026-04-03') {
-  render(
+  return render(
     <MemoryRouter initialEntries={['/calendar']}>
       <DateProvider initialSelectedDate={initialSelectedDate}>
         <Routes>
@@ -57,12 +57,39 @@ test('renders a month grid with weekday headers and leading empty slots', () => 
 test('shows lunar labels for normal days and solar terms for seasonal nodes', () => {
   renderCalendarPage();
 
-  const normalDayButton = screen.getByRole('button', { name: '2026-04-01' });
+  const normalDayButton = screen.getByRole('button', { name: '2026-04-02' });
   const solarTermButton = screen.getByRole('button', { name: '2026-04-05' });
 
   expect(normalDayButton).toHaveClass('month-calendar__day', 'month-calendar__day--rect');
-  expect(normalDayButton).toHaveTextContent('1');
-  expect(normalDayButton).toHaveTextContent('十四');
+  expect(normalDayButton).toHaveTextContent('2');
+  expect(normalDayButton).toHaveTextContent('十五');
   expect(solarTermButton).toHaveTextContent('5');
   expect(solarTermButton).toHaveTextContent('清明');
+});
+
+test('shows public festivals and official rest-day badges', () => {
+  renderCalendarPage('2026-05-01');
+
+  const laborDayButton = screen.getByRole('button', { name: '2026-05-01' });
+
+  expect(laborDayButton).toHaveTextContent('劳动节');
+  expect(
+    laborDayButton.querySelector('.month-calendar__holiday-badge'),
+  ).toHaveTextContent('休');
+  expect(screen.getByRole('note')).toHaveTextContent('覆盖 2002-2026 年');
+});
+
+test('shows make-up workdays and an explicit message for uncovered years', () => {
+  const { unmount } = renderCalendarPage('2026-02-28');
+  const makeUpWorkdayButton = screen.getByRole('button', { name: '2026-02-28' });
+
+  expect(
+    makeUpWorkdayButton.querySelector('.month-calendar__holiday-badge'),
+  ).toHaveTextContent('班');
+
+  unmount();
+  renderCalendarPage('2027-01-01');
+
+  expect(screen.getByRole('button', { name: '2027-01-01' })).toHaveTextContent('元旦节');
+  expect(screen.getByRole('note')).toHaveTextContent('2027 年法定节假日及调休数据暂未收录');
 });

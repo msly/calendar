@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { AlmanacInfoGrid } from '../components/home/AlmanacInfoGrid';
+import { DayOccasions } from '../components/home/DayOccasions';
 import { LuckyHoursTimeline } from '../components/home/LuckyHoursTimeline';
 import { TodaySummaryCard } from '../components/home/TodaySummaryCard';
 import { getDayAlmanac } from '../lib/almanac/adapter';
+import { getDayDisplay } from '../lib/almanac/day-display';
 import { isValidIsoDate } from '../lib/date/date';
 import { useDateContext } from '../state/date-context';
 
@@ -16,10 +18,12 @@ export function HomePage({ displayDateOverride }: HomePageProps) {
   const displayDate = displayDateOverride ?? selectedDate;
 
   const dayAlmanac = getDayAlmanac(displayDate);
+  const dayDisplay = getDayDisplay(displayDate);
 
   return (
     <main className="app-shell home-page">
       <TodaySummaryCard summary={dayAlmanac.summary} />
+      <DayOccasions dayDisplay={dayDisplay} />
       <LuckyHoursTimeline hours={dayAlmanac.hours} />
       <AlmanacInfoGrid title="黄历信息" fields={Object.values(dayAlmanac.core)} />
       {dayAlmanac.additionalGroups.map((group) => (

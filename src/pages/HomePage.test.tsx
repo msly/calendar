@@ -159,6 +159,35 @@ test('keeps the mobile-first content order with explicit styling hooks', () => {
   );
 });
 
+test('shows festivals and official holiday details for the displayed date', () => {
+  mockedGetDayAlmanac.mockReturnValue({ ...homePageFixture, isoDate: '2026-02-28' });
+
+  render(
+    <DateProvider initialSelectedDate="2026-02-28">
+      <HomePage />
+    </DateProvider>,
+  );
+
+  expect(screen.getByRole('region', { name: '节日与假期' })).toBeInTheDocument();
+  expect(screen.getByText('调休上班')).toBeInTheDocument();
+  expect(screen.getByText('春节（关联 2026-02-17）')).toBeInTheDocument();
+});
+
+test('shows official holiday coverage status for an uncovered year', () => {
+  mockedGetDayAlmanac.mockReturnValue({ ...homePageFixture, isoDate: '2027-01-01' });
+
+  render(
+    <DateProvider initialSelectedDate="2027-01-01">
+      <HomePage />
+    </DateProvider>,
+  );
+
+  expect(screen.getByText('元旦节')).toBeInTheDocument();
+  expect(screen.getByRole('note')).toHaveTextContent(
+    '2027 年法定节假日及调休数据暂未收录',
+  );
+});
+
 test('shows richer lucky-hour details on the homepage cards', () => {
   mockedGetDayAlmanac.mockReturnValue(homePageFixture);
 
