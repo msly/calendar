@@ -10,6 +10,7 @@ type DateHeaderViewProps = {
   onPreviousDay: () => void;
   onNextDay: () => void;
   calendarEntry: JSX.Element;
+  selectionEntry: JSX.Element;
 };
 
 function DateHeaderView({
@@ -18,7 +19,8 @@ function DateHeaderView({
   lunarLabel,
   onPreviousDay,
   onNextDay,
-  calendarEntry
+  calendarEntry,
+  selectionEntry
 }: DateHeaderViewProps) {
   return (
     <header className="date-header">
@@ -46,6 +48,7 @@ function DateHeaderView({
           下一天
         </button>
         <div className="date-header__entry">{calendarEntry}</div>
+        <div className="date-header__entry">{selectionEntry}</div>
       </div>
     </header>
   );
@@ -57,6 +60,7 @@ function DateHeaderInRouter() {
   const navigate = useNavigate();
   const detailRouteMatch = /^\/day\/(.+)$/.exec(location.pathname);
   const isCalendarRoute = location.pathname === '/calendar';
+  const isSelectionRoute = location.pathname === '/select-date';
   const routeDateParam = detailRouteMatch?.[1] ?? null;
   const displayDate =
     routeDateParam && isValidIsoDate(routeDateParam) ? routeDateParam : selectedDate;
@@ -86,6 +90,7 @@ function DateHeaderInRouter() {
       onPreviousDay={handlePreviousDay}
       onNextDay={handleNextDay}
       calendarEntry={<Link to={isCalendarRoute ? '/' : '/calendar'}>{isCalendarRoute ? '返回首页' : '查看月历'}</Link>}
+      selectionEntry={<Link to={isSelectionRoute ? '/' : '/select-date'}>{isSelectionRoute ? '返回首页' : '择日查询'}</Link>}
     />
   );
 }
@@ -108,6 +113,7 @@ export function DateHeader() {
       onPreviousDay={goToPreviousDay}
       onNextDay={goToNextDay}
       calendarEntry={<a href="/calendar">查看月历</a>}
+      selectionEntry={<a href="/select-date">择日查询</a>}
     />
   );
 }

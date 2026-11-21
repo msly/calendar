@@ -3,6 +3,7 @@ import { BrowserRouter, HashRouter, Outlet, Route, Routes } from 'react-router-d
 import { AppLayout } from './layout/AppLayout';
 import { DayHomePage, HomePage } from '../pages/HomePage';
 import { CalendarPage } from '../pages/CalendarPage';
+import { DateSelectionPage } from '../pages/DateSelectionPage';
 import { ExplainPage } from '../pages/ExplainPage';
 
 export function AppRouter() {
@@ -21,6 +22,7 @@ export function AppRouter() {
         >
           <Route index element={<HomePage />} />
           <Route path="calendar" element={<CalendarPage />} />
+          <Route path="select-date" element={<DateSelectionPage />} />
           <Route path="day/:date" element={<DayHomePage />} />
           <Route path="explain/:key" element={<ExplainPage />} />
         </Route>

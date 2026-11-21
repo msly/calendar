@@ -36,6 +36,18 @@ test('returns to homepage from the calendar header entry', async () => {
   expect(screen.getByRole('heading', { name: '今日黄历' })).toBeInTheDocument();
 });
 
+test('opens date selection from the header entry', async () => {
+  const user = userEvent.setup();
+  window.history.pushState({}, '', '/');
+  render(<AppRouter />);
+
+  await user.click(screen.getByRole('link', { name: '择日查询' }));
+
+  expect(screen.getByRole('heading', { name: '择日查询' })).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: '返回首页' })).toBeInTheDocument();
+  expect(window.location.pathname).toBe('/select-date');
+});
+
 test('syncs selected date from route param when visiting day route directly', async () => {
   window.history.pushState({}, '', '/day/2026-04-12');
   render(<AppRouter />);
